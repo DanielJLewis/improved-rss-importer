@@ -204,10 +204,7 @@ class ItemTag extends Tag
 			if(count($enclosures) > 0) {
 				foreach($enclosures as $enc) {
 					// Encode for WP storage.
-					$value[] = $enc->url;
-					$value[] = $enc->length;
-					$value[] = $enc->type;
-					add_post_meta($post_id,"enclosure",$value);
+					add_post_meta($post_id,"enclosure",$enc->__toString());
 					_e('adding enclosure<br/>');
 				}
 			}
@@ -222,7 +219,7 @@ class Enclosure{
 	var $length;
 	var $type;
 	public function __toString(){
-		return $this->url . "|" . $this->length . "|" . $this->type;
+		return $this->url . "\n" . $this->length . "\n" . $this->type;
 	}
 }
 class EnclosureTag extends Tag
