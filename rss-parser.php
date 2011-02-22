@@ -169,7 +169,7 @@ class ItemTag extends Tag
 
 		// TODO: make the author user changable
 		// Set the author to the first author on the system
-		$post_author = 1;
+		$post_author = wp_get_current_user()->ID;
 		// TODO: Add options for the user to change the default state of the
 		//       imported post
 		$post_status = 'publish';
