@@ -1,14 +1,15 @@
 <?php
 /*
-Plugin Name: RSS Slurp
-Plugin URI: http://wordpress.org/extend/plugins/rss-slurp/
+Plugin Name: Improved RSS Importer
+Plugin URI: https://github.com/witkamp/improved-rss-importer
 Description: Import posts from an RSS feed, including enclosures
 Author: witkamp
-Author URI: http://wordpress.org/
+Author URI:
 Version: 0.1
 Stable tag: 0.1
-License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+License: MIT - http://www.opensource.org/licenses/mit-license.php
 */
+
 if ( !defined('WP_LOAD_IMPORTERS') )
 	return;
 
@@ -18,10 +19,19 @@ require_once ABSPATH . 'wp-admin/includes/import.php';
 require_once('rss-parser.php');
 
 function rss_slurp_greet() {
-	echo '<div class="narrow">';
-	echo '<p>'.__('I need to SLURP your RSS').'</p>';
+	?>
+	<div class="narrow">
+	<p>This importer is an improved version of the native <a href ="http://wordpress.org/extend/plugins/rss-importer">RSS Import plugin</a>
+	It uses a XML parser instead of regex to extract the data. This allows it to handle feeds with CDATA blocks correctly. Enclosure tags are preserved. This makes importing podcasts possible.</p>
+	<h2>Features</h2>
+	<lu>
+		<li>CDATA blocks are supported</li>
+		<li>Enclosure tags are preserved</li>
+		<li>Improved parsing performance</li>
+	</lu>
+	<?php
 	// TODO: Change this to use URLs or file from computer
-	wp_import_upload_form("admin.php?import=rss-slurp&amp;step=1");
+	wp_import_upload_form("admin.php?import=improved-rss-importer&amp;step=1");
 	echo '</div>';
 }
 
@@ -62,7 +72,7 @@ function rss_slurp_dispatch(){
 	// Put the tool icon on the page
 	screen_icon();
 	// Echo title
-	echo '<h2>'.__('RSS Slurp').'</h2>';
+	echo '<h2>'.__('Improved RSS Importer').'</h2>';
 
 	switch ($step) {
 		case 0 :
@@ -76,5 +86,5 @@ function rss_slurp_dispatch(){
 	echo '</div>';
 }	
 
-register_importer('rss-slurp', __('RSS Slurp'), __('Import posts from an RSS feed.'), rss_slurp_dispatch);
+register_importer('improved-rss-importer', __('Improved RSS Importer'), __('Import posts from an RSS feed.'), rss_slurp_dispatch);
 ?>
