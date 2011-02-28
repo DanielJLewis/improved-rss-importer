@@ -3,7 +3,7 @@ Contributors: witkamp
 Tags: importer, rss, podcast
 Requires at least: 3.0.4
 Tested up to: 3.0.4
-Stable tag: 4.3
+Stable tag: 0.1
 
 An Improved RSS Importer. Supports RSS enclosures and CDATA blocks. Improved parsing performance.
 
@@ -21,7 +21,7 @@ Improvements
 
 1. Upload `improved-rss-importer` to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Navigate to the Wordpress Tools menu and select Improved RSS Impor
+1. Navigate to the Word-press Tools menu and select 'Improved RSS Importer'
 
 
 == Changelog ==
