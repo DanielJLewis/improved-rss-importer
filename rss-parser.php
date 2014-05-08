@@ -174,6 +174,7 @@ class ItemTag extends Tag
 		$post_date_gmt = strtotime($post_date_gmt[0]);
 		$post_date_gmt = gmdate('Y-m-d H:i:s', $post_date_gmt);
 		$post_date = get_date_from_gmt( $post_date_gmt );
+		$keywords 	   = $this->get_tag('ITUNES:KEYWORDS');
 
 		echo "Title:" . $post_title . "<br/>";
 		echo "Author: ".$post_author."<br/>";
@@ -181,6 +182,7 @@ class ItemTag extends Tag
 		echo "Enclosure: " . $enclosures[0] . "<br/>";
 		echo "GUID: " . $guid . "<br/>";
 		echo "PUBDATE: ". $post_date_gmt . "<br/>";
+		echo "KEYWORDS: " . $keywords  . "<br/>";
 
 		// TODO: make the author user changable
 		// Set the author to the first author on the system
@@ -196,6 +198,7 @@ class ItemTag extends Tag
 		  'post_title', 
 		  'post_status', 
 		  'guid', 
+		  'keywords',
 		  'categories');
 
 		// Check to see is the post already exist
@@ -210,6 +213,12 @@ class ItemTag extends Tag
 				return;
 			}
 			
+      // add Keywords
+			if (count($keywords) > 0) {
+				wp_set_post_tags($post_id, $keywords);
+				_e('created tags<br/>');
+			}
+
       // add Categories
 			if (count($categories) > 0) {
 				wp_create_categories($categories, $post_id);
@@ -286,6 +295,7 @@ class RSSParser extends TagParser
 		$this->add_tag(new EnclosureTag());
 		$this->add_tag(new TextTag("GUID"));
 		$this->add_tag(new TextTag("PUBDATE"));
+		$this->add_tag(new TextTag("ITUNES:KEYWORDS"));
 			
 	}
 	function gen_tag($name){
